@@ -1,66 +1,63 @@
 # AL RABEE SUPERMARKET
 
-A modern online grocery shopping web application for AL RABEE SUPERMARKET in Oman, built with Next.js 15. Features product browsing, real-time inventory tracking, category filtering, shopping cart management, curbside pickup with car details, admin dashboard for stock and offer management, and full checkout flow -- all priced in Omani Riyal (OMR).
+A modern online grocery shopping application built with **Next.js 15**, featuring a customer-facing storefront and a password-protected admin dashboard. All prices are displayed in **Omani Riyal (OMR)**.
 
 <img width="1467" height="835" alt="Screenshot 2026-02-16 at 12 49 26 AM" src="https://github.com/user-attachments/assets/fbd96b57-32d0-4ef9-9db6-11edc104ad01" />
 
 
 ## Features
 
-### Customer-Facing
+### Storefront (Customer)
 
-- **Product Catalog** -- 40+ products across 10 categories (Fruits, Vegetables, Dairy, Meat, Bakery, Beverages, Pantry, Snacks, Household)
-- **Category Filter Tabs** -- Quick-access horizontal tabs to browse products by category
-- **Search & Quick Filters** -- Search by name/description, filter by discount items and top sellers
-- **Featured Products** -- Highlighted products displayed on the homepage
-- **Product Detail Pages** -- View detailed product info including inventory levels and in-store location (aisle & section)
-- **Shopping Cart** -- Add/remove items, update quantities with persistent cart state (via Zustand + localStorage)
-- **Store Selector** -- Choose between 2 AL RABEE branches (Muscat & Salalah)
-- **Curbside Pickup** -- Toggle curbside delivery with car number (required) and driver name (optional)
-- **Checkout Flow** -- Supports card and cash payments with change calculation
-- **Omani Riyal (OMR)** -- All prices displayed in OMR with 3 decimal places, 5% VAT
-- **Responsive Design** -- Mobile-first UI with 2-column grid on mobile, 4-column on desktop
+| Feature | Description |
+|---|---|
+| Product Catalog | 40+ products across 10 categories |
+| Category Tabs | Horizontal filter tabs for quick browsing |
+| Search & Filters | Full-text search, discount filter, top-seller filter |
+| Product Details | Detailed view with inventory levels and aisle location |
+| Shopping Cart | Persistent cart state via Zustand + localStorage |
+| Store Selector | Choose between 2 branches (Muscat & Salalah) |
+| Curbside Pickup | Car number (required) and driver name (optional) |
+| Checkout | Card and cash payments with change calculation |
+| Responsive UI | Mobile-first, 2-col mobile / 4-col desktop grid |
 
 ### Admin Dashboard (`/admin`)
 
-- **Stock Management** -- View and update store & warehouse stock levels for every product
-- **Out-of-Stock Toggle** -- One-click to mark items as out of stock or restock them
-- **Add New Products** -- Full form to add products with name, price, category, image, stock, location, and flags
-- **Edit Products** -- Update any product field (name, price, description, category, image, location, stock, featured/top-selling flags)
-- **Offer / Discount Management** -- Set or remove percentage discounts on any product with live price preview
-- **Delete Products** -- Remove products from the catalog
-- **Dashboard Stats** -- At-a-glance cards for total products, out-of-stock, low-stock, and active offers
-- **Real-Time Sync** -- All admin changes instantly reflect on the customer-facing pages (shared in-memory store)
-- **Sortable Table** -- Sort products by name, category, price, stock, or discount
-- **Filter & Search** -- Filter by category, stock status (all/out/low), and search by name
+| Feature | Description |
+|---|---|
+| Login Protection | Username/password auth with signed session cookies |
+| Stock Management | Update store and warehouse inventory per product |
+| Add / Edit / Delete | Full CRUD for the product catalog |
+| Offer Management | Set or remove percentage discounts with price preview |
+| Dashboard Stats | At-a-glance cards for total, out-of-stock, low-stock, active offers |
+| Real-Time Sync | Admin changes instantly reflect on the customer storefront |
+| Sort & Filter | Sortable table with category and stock-status filters |
+
+> **Default credentials:** `admin` / `admin123` (override via `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars)
 
 ## Tech Stack
 
-| Layer         | Technology                          |
-| ------------- | ----------------------------------- |
-| Framework     | [Next.js 15](https://nextjs.org) (App Router, Turbopack) |
-| Language      | TypeScript                          |
-| Styling       | Tailwind CSS v4                     |
+| Layer | Technology |
+|---|---|
+| Framework | [Next.js 15](https://nextjs.org) (App Router, Turbopack) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
 | UI Components | [shadcn/ui](https://ui.shadcn.com) (Radix UI primitives) |
-| State         | [Zustand](https://zustand.docs.pmnd.rs) (with persist middleware) |
-| Icons         | [Lucide React](https://lucide.dev)  |
-| Images        | Next.js Image (optimised remote images via Unsplash) |
+| State | [Zustand](https://zustand.docs.pmnd.rs) (persist middleware) |
+| Icons | [Lucide React](https://lucide.dev) |
 
 ## Getting Started
 
 ### Prerequisites
 
 - **Node.js** >= 18
-- **npm** (or bun/yarn/pnpm)
+- **npm** (or yarn / pnpm)
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repository-url>
+git clone https://github.com/ashaheem32/AL-RABEE.git
 cd "AL RABEE SUPERMARKET"
-
-# Install dependencies
 npm install
 ```
 
@@ -72,76 +69,80 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Production Build
+### Production
 
 ```bash
 npm run build
 npm start
 ```
 
+### Environment Variables (optional)
+
+| Variable | Default | Description |
+|---|---|---|
+| `ADMIN_USERNAME` | `admin` | Admin login username |
+| `ADMIN_PASSWORD` | `admin123` | Admin login password |
+| `ADMIN_SECRET` | (internal) | HMAC signing key for session tokens |
+
 ## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── admin/                 # Admin dashboard (stock, offers, CRUD products)
+│   ├── admin/
+│   │   ├── login/page.tsx          # Admin login page
+│   │   └── page.tsx                # Admin dashboard
 │   ├── api/
-│   │   ├── admin/products/    # Admin API routes (GET, POST, PUT, DELETE)
-│   │   ├── products/          # Customer product API routes (list, detail)
-│   │   └── stores/            # Store locations API route
-│   ├── cart/                  # Shopping cart page with car details form
-│   ├── checkout/              # Checkout page (card/cash payments)
-│   ├── product/[id]/          # Product detail page
-│   ├── globals.css            # Tailwind CSS theme & variables
-│   ├── layout.tsx             # Root layout
-│   └── page.tsx               # Homepage (product catalog + category tabs)
+│   │   ├── admin/
+│   │   │   ├── auth/               # Login / logout / session check
+│   │   │   └── products/           # CRUD endpoints (protected)
+│   │   ├── products/               # Customer product endpoints
+│   │   └── stores/                 # Store locations endpoint
+│   ├── cart/page.tsx               # Shopping cart
+│   ├── checkout/page.tsx           # Checkout flow
+│   ├── product/[id]/page.tsx       # Product detail
+│   ├── globals.css                 # Tailwind theme
+│   ├── layout.tsx                  # Root layout
+│   └── page.tsx                    # Homepage
 ├── components/
-│   ├── ui/                    # shadcn/ui components (button, card, dialog, table, etc.)
-│   ├── header.tsx             # App header with cart badge, admin link & store selector
-│   ├── product-card.tsx       # Product card with OMR pricing
-│   ├── product-filters.tsx    # Search bar + quick filter buttons
-│   └── store-selector.tsx     # Store location picker dialog (2 branches)
-├── lib/
-│   ├── cart-store.ts          # Zustand cart state (items, car details, curbside)
-│   ├── mock-data.ts           # 40+ seed products & 2 store locations
-│   ├── product-store.ts       # Server-side in-memory product store (shared by admin & customer APIs)
-│   ├── safe-storage.ts        # SSR-safe localStorage wrapper
-│   ├── types.ts               # TypeScript interfaces (Product, Store, CarDetails, etc.)
-│   └── utils.ts               # Utility functions (cn, formatOMR)
-└── instrumentation.ts         # Node.js localStorage polyfill for SSR
+│   ├── ui/                         # shadcn/ui primitives
+│   ├── header.tsx                  # App header
+│   ├── product-card.tsx            # Product card
+│   ├── product-filters.tsx         # Search & filter bar
+│   └── store-selector.tsx          # Branch picker dialog
+└── lib/
+    ├── admin-auth.ts               # Auth utilities
+    ├── cart-store.ts               # Zustand cart state
+    ├── mock-data.ts                # Seed data (products & stores)
+    ├── product-store.ts            # Server-side in-memory store
+    ├── safe-storage.ts             # SSR-safe localStorage wrapper
+    ├── types.ts                    # TypeScript interfaces
+    └── utils.ts                    # Helpers (cn, formatOMR)
 ```
 
-## API Routes
+## API Reference
 
-### Customer APIs
+### Customer Endpoints
 
-| Method | Endpoint               | Description                       |
-| ------ | ---------------------- | --------------------------------- |
-| GET    | `/api/products`        | List products (with query filters)|
-| GET    | `/api/products/[id]`   | Get a single product by ID        |
-| GET    | `/api/stores`          | List all store locations           |
+| Method | Route | Description |
+|---|---|---|
+| `GET` | `/api/products` | List products (supports `?search`, `?category`, `?discountOnly`, `?topSelling`, `?featured`) |
+| `GET` | `/api/products/[id]` | Single product by ID |
+| `GET` | `/api/stores` | List store branches |
 
-#### Product Query Parameters
+### Admin Endpoints (require auth cookie)
 
-| Parameter      | Type    | Description                          |
-| -------------- | ------- | ------------------------------------ |
-| `search`       | string  | Search by product name or description|
-| `category`     | string  | Filter by category name              |
-| `discountOnly` | boolean | Show only discounted products        |
-| `topSelling`   | boolean | Show only top-selling products       |
-| `featured`     | boolean | Show only featured products          |
+| Method | Route | Description |
+|---|---|---|
+| `POST` | `/api/admin/auth/login` | Authenticate and receive session cookie |
+| `POST` | `/api/admin/auth/logout` | Clear session |
+| `GET` | `/api/admin/auth/check` | Verify current session |
+| `GET` | `/api/admin/products` | List all products with dashboard stats |
+| `POST` | `/api/admin/products` | Create a product |
+| `PUT` | `/api/admin/products/[id]` | Update a product |
+| `DELETE` | `/api/admin/products/[id]` | Delete a product |
 
-### Admin APIs
-
-| Method | Endpoint                     | Description                                 |
-| ------ | ---------------------------- | ------------------------------------------- |
-| GET    | `/api/admin/products`        | List all products with dashboard stats      |
-| POST   | `/api/admin/products`        | Add a new product                           |
-| GET    | `/api/admin/products/[id]`   | Get a single product by ID                  |
-| PUT    | `/api/admin/products/[id]`   | Update product (stock, price, discount, etc)|
-| DELETE | `/api/admin/products/[id]`   | Remove a product from the catalog           |
-
-> **Note:** Data is stored in an in-memory server-side store. Changes persist while the dev server is running but reset on restart.
+> **Note:** Product data lives in an in-memory store. Changes persist while the server runs but reset on restart.
 
 ## License
 
