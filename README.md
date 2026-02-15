@@ -79,6 +79,17 @@ npm run build
 npm start
 ```
 
+### Stop the Server
+
+To kill the dev server running on localhost:3000:
+
+```bash
+# macOS / Linux
+lsof -ti :3000 | xargs kill -9
+
+# Or simply press Ctrl + C in the terminal running the server
+```
+
 ### Environment Variables (optional)
 
 | Variable | Default | Description |
