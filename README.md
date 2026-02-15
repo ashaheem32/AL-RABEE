@@ -57,6 +57,7 @@ A modern online grocery shopping application built with **Next.js 15**, featurin
 
 ```bash
 git clone https://github.com/ashaheem32/AL-RABEE.git
+cd AL-RABEE
 cd "AL RABEE SUPERMARKET"
 npm install
 ```
@@ -64,6 +65,7 @@ npm install
 ### Development
 
 ```bash
+cd "AL RABEE SUPERMARKET"
 npm run dev
 ```
 
@@ -72,6 +74,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Production
 
 ```bash
+cd "AL RABEE SUPERMARKET"
 npm run build
 npm start
 ```
