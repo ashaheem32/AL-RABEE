@@ -2,6 +2,9 @@
 
 A modern online grocery shopping web application for AL RABEE SUPERMARKET in Oman, built with Next.js 15. Features product browsing, real-time inventory tracking, category filtering, shopping cart management, curbside pickup with car details, admin dashboard for stock and offer management, and full checkout flow -- all priced in Omani Riyal (OMR).
 
+<img width="1467" height="835" alt="Screenshot 2026-02-16 at 12 49 26 AM" src="https://github.com/user-attachments/assets/fbd96b57-32d0-4ef9-9db6-11edc104ad01" />
+
+
 ## Features
 
 ### Customer-Facing
